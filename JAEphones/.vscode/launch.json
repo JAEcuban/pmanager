@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - JaEphonesApplication",
+            "request": "launch",
+            "mainClass": "jae.phones.JAEphones.JaEphonesApplication",
+            "projectName": "JAEphones"
+        }
+    ]
+}
