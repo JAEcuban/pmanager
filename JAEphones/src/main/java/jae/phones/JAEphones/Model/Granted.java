@@ -6,15 +6,20 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
@@ -38,14 +43,23 @@ public class Granted implements Serializable {
 
     private Boolean isCharge;
 
+    private Boolean active;
+
     @NotNull
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "person_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Person person;
 
     @NotNull
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "sim_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Sim sim;
 
     public Granted() {
         this.isCharge = false;
+        this.active = true;
     }
 
     public Long getId() {
@@ -94,5 +108,13 @@ public class Granted implements Serializable {
 
     public void setSim(Sim sim) {
         this.sim = sim;
+    }
+
+    public Boolean getActive() {
+        return this.active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 }
