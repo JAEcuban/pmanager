@@ -39,19 +39,19 @@ import jae.phones.JAEphones.Security.JwtTokenProvider;
 public class AuthController {
 
     @Autowired
-    AuthenticationManager authenticationManager;
+    private AuthenticationManager authenticationManager;
 
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
     @Autowired
-    RoleRepository roleRepository;
+    private RoleRepository roleRepository;
 
     @Autowired
-    PasswordEncoder encoder;
+    private PasswordEncoder encoder;
 
     @Autowired
-    JwtTokenProvider jwtProvider;
+    private JwtTokenProvider jwtProvider;
 
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest login) {
@@ -73,7 +73,7 @@ public class AuthController {
         }
         User user = new User(signupRequest.getName(), signupRequest.getUsername(), signupRequest.getEmail(),
                 signupRequest.getPassword());
-        user.setPassword(encoder.encode(user.getPassword()));
+        user.setPassword(this.encoder.encode(user.getPassword()));
 
         Role role = roleRepository.findByRole(RoleName.ROLE_USER)
                 .orElseThrow(() -> new AppException("User role not set"));
