@@ -20,7 +20,7 @@ import jae.phones.JAEphones.Exception.ResourceNotFoundException;
 import jae.phones.JAEphones.Model.Sim;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/business")
 public class SimController {
 
     @Autowired

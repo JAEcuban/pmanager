@@ -1,7 +1,6 @@
 package jae.phones.JAEphones.Model;
 
-import java.io.Serializable;
-import java.util.Date;
+import java.time.Instant;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,8 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -25,7 +22,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @Entity
 @Table(name = "granted")
 @EntityListeners(AuditingEntityListener.class)
-public class Granted implements Serializable {
+public class Granted extends DateAudit {
 
     private static final long serialVersionUID = 1L;
 
@@ -34,9 +31,8 @@ public class Granted implements Serializable {
     private Long id;
 
     @Column(nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
     @NotBlank
-    private Date granteDate;
+    private Instant granteDate;
 
     @Column(nullable = true)
     private String phone;
@@ -70,11 +66,11 @@ public class Granted implements Serializable {
         this.id = id;
     }
 
-    public Date getGranteDate() {
+    public Instant getGranteDate() {
         return this.granteDate;
     }
 
-    public void setGranteDate(Date granteDate) {
+    public void setGranteDate(Instant granteDate) {
         this.granteDate = granteDate;
     }
 

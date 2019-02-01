@@ -1,7 +1,5 @@
 package jae.phones.JAEphones.Model;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
@@ -16,7 +14,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @Entity
 @Table(name = "person")
 @EntityListeners(AuditingEntityListener.class)
-public class Person implements Serializable {
+public class Person extends DateAudit {
 
     private static final long serialVersionUID = 1L;
 
@@ -29,9 +27,6 @@ public class Person implements Serializable {
 
     @Column(nullable = true)
     private String dni;
-
-    public Person() {
-    }
 
     public Long getId() {
         return this.id;
